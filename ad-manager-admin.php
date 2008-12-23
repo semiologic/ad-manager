@@ -195,6 +195,7 @@ class ad_manager_admin
 		echo '<p>'
 			. '<label>'
 			. '<input type="checkbox" name="ad_unit[' . $number .'][php_condition]"'
+				. ' id="ad_unit__' . $number .'__php_condition"'
 				. ( $php_condition
 					? ' checked="checked"'
 					: ''
@@ -211,6 +212,7 @@ class ad_manager_admin
 			. '</td>' . "\n"
 			. '<td>'
 			. '<textarea class="widefat code" rows="3" cols="20" name="ad_unit[' . $number .'][php_code]"'
+				. ' onchange="document.getElementById(\'ad_unit__' . $number .'__php_condition\').checked = true;"'
 				. ( !current_user_can('unfiltered_html')
 					? ' disabled="disabled"'
 					: ''
