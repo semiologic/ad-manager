@@ -212,7 +212,7 @@ class ad_manager_admin
 			. '</td>' . "\n"
 			. '<td>'
 			. '<textarea class="widefat code" rows="3" cols="20" name="ad_unit[' . $number .'][php_code]"'
-				. ' onchange="document.getElementById(\'ad_unit__' . $number .'__php_condition\').checked = true;"'
+				. ' onchange="if ( this.value ) document.getElementById(\'ad_unit__' . $number .'__php_condition\').checked = true; else document.getElementById(\'ad_unit__' . $number .'__php_condition\').checked = false;"'
 				. ( !current_user_can('unfiltered_html')
 					? ' disabled="disabled"'
 					: ''
