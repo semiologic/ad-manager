@@ -3,28 +3,6 @@
 class ad_manager_admin
 {
 	#
-	# init()
-	#
-	
-	function init()
-	{
-		add_filter('sem_api_key_protected', array('ad_manager_admin', 'sem_api_key_protected'));
-	} # init()
-	
-		
-	#
-	# sem_api_key_protected()
-	#
-	
-	function sem_api_key_protected($array)
-	{
-		$array[] = 'http://www.semiologic.com/media/software/marketing/ad-manager/ad-manager.zip';
-		
-		return $array;
-	} # sem_api_key_protected()
-	
-	
-	#
 	# widget_control()
 	#
 	
