@@ -8,7 +8,7 @@ Version: 1.0.2 alpha
 Author URI: http://www.getsemiologic.com
 Update Service: http://version.semiologic.com/plugins
 Update Tag: ad_manager
-Update Package: http://members.semiologic.com/media/wp-plugins/ad-manager.zip
+Update Package: https://members.semiologic.com/media/wp-plugins/ad-manager.zip
 */
 
 /*
