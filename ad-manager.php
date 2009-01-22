@@ -6,7 +6,7 @@ Description: A widget-based ad unit manager. Combine with inline widgets and wid
 Version: 1.0.2 alpha
 Author: Denis de Bernardy
 Author URI: http://www.getsemiologic.com
-Update Package: https://members.semiologic.com/media/plugins/ad-manager.zip
+Update Package: https://members.semiologic.com/media/plugins/ad-manager/ad-manager.zip
 */
 
 /*
