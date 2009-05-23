@@ -3,9 +3,11 @@
 Plugin Name: Ad Manager
 Plugin URI: http://www.semiologic.com/software/ad-manager/
 Description: A widget-based ad unit manager. Combine with inline widgets and widget contexts to get the most of it.
-Version: 1.0.3 RC
+Version: 1.1 alpha
 Author: Denis de Bernardy
 Author URI: http://www.getsemiologic.com
+Text Domain: ad-manager-info
+Domain Path: /lang
 */
 
 /*
