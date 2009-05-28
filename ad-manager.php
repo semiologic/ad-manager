@@ -149,7 +149,7 @@ class ad_manager
 		{
 			if ( is_single() )
 			{
-				$post = get_post($GLOBALS['wp_query']->get_queried_object_id());
+				$post = get_post($GLOBALS['wp_the_query']->get_queried_object_id());
 			}
 			elseif ( in_the_loop() && ( is_home() && !is_front_page() || !is_page() ) )
 			{
