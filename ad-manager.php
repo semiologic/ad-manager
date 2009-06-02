@@ -125,10 +125,7 @@ class ad_manager
 		# admin: just return a title
 		
 		if ( is_admin() )
-		{
-			echo $before_widget . $before_title . $title . $after_title . $after_widget;
 			return;
-		}
 		
 		# bypass all of this if there's no code at all or if we're on a 404 or in a feed
 		
