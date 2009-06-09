@@ -102,8 +102,8 @@ class ad_manager_admin
 		extract($options);
 		
 		$title = esc_attr($title);
-		$code = format_to_edit($code);
-		$php_code = format_to_edit($php_code);
+		$code = esc_html($code);
+		$php_code = esc_html($php_code);
 
 		echo '<h3>' . 'Code' . '</h3>' . "\n";
 		
