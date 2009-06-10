@@ -1,0 +1,71 @@
+# Ad Manager pot file.
+# Copyright (C) 2009 Mesoconcepts <http://www.mesoconcepts.com>
+# This file is distributed under the same license as the Ad Manager package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: 2.0\n"
+"Report-Msgid-Bugs-To: https://tickets.semiologic.com\n"
+"POT-Creation-Date: 2009-06-10 21:08+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ad-manager.php:92
+msgid "An ad unit. Combine with Inline Widgets for use in posts."
+msgstr ""
+
+#: ad-manager.php:98
+msgid "Ad Widget"
+msgstr ""
+
+#: ad-manager.php:240
+#, php-format
+msgid ""
+"You're viewing a place holder for an ad unit (<code>%s</code>) because you "
+"are logged in. Please log out to see the real ad."
+msgstr ""
+
+#: ad-manager.php:290
+msgid "Title (never displayed to visitors)"
+msgstr ""
+
+#: ad-manager.php:309
+msgid "Context"
+msgstr ""
+
+#: ad-manager.php:312
+msgid "Only display this ad unit when any of these conditions are met:"
+msgstr ""
+
+#: ad-manager.php:324
+msgid "The visitor comes from a search engine"
+msgstr ""
+
+#: ad-manager.php:337
+msgid "The post (not page) is more that 2 weeks old"
+msgstr ""
+
+#: ad-manager.php:350
+msgid ""
+"The visitor is not a regular reader (three visits in the past two weeks)"
+msgstr ""
+
+#: ad-manager.php:364
+msgid ""
+"The following php condition (<a href=\"http://codex.wordpress.org/"
+"Conditional_Tags\" target=\"_blank\">WordPress conditional tags</a>) is met:"
+msgstr ""
+
+#: ad-manager.php:387
+msgid "Ad Unit"
+msgstr ""
+
+#: ad-manager.php:388
+msgid "Enter your ad unit code here"
+msgstr ""
