@@ -112,7 +112,15 @@ class ad_manager extends WP_Widget {
 		$instance = wp_parse_args($instance, ad_manager::defaults());
 		extract($instance, EXTR_SKIP);
 		
-		if ( is_admin() || !$code || is_404() || is_feed() )
+		if ( is_admin() ) {
+			echo $before_widget
+				. ( $title
+					? ( $before_title . $title . $after_title )
+					: ''
+					)
+				. $after_widget;
+			return;
+		} elseif ( !$code || is_404() || is_feed() )
 			return;
 		
 		# check preconditions from the least to most expensive in CPU cycles
