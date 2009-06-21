@@ -33,6 +33,8 @@ add_action('widgets_init', array('ad_manager', 'widgets_init'));
 
 if ( !is_admin() ) {
 	add_action('init', array('ad_manager', 'set_cookie'));
+} else {
+	add_action('admin_print_styles-widgets.php', array('ad_manager', 'admin_styles'));
 }
 
 class ad_manager extends WP_Widget {
@@ -245,7 +247,20 @@ class ad_manager extends WP_Widget {
 		
 		if ( current_user_can('unfiltered_html') || is_preview() ) {
 			$code = '<div style="color: Black; background: GhostWhite; border: dotted 1px SteelBlue; padding: 20px;">' . "\n"
-				. sprintf(__('This is a place holder for an ad unit (<code>%s</code>). Please log out to see the real ad.', 'ad-manager'), $title)
+				. sprintf(__('Please log out to see this ad unit (<code>%s</code>).', 'ad-manager'), $title)
+				. '</div>' . "\n";
+		}
+		
+		# apply style preferences
+
+		if ( $float && in_array($id, array('inline_widgets', 'the_entry')) ) {
+			$code = '<div style="'
+				. ( $float == 'left'
+					? 'float: left; margin: 0px .5em .1em 0px;'
+					: 'float: right; margin: 0px 0px .1em .5em;'
+					)
+				. '">' . "\n"
+				. $code
 				. '</div>' . "\n";
 		}
 		
@@ -274,6 +289,9 @@ class ad_manager extends WP_Widget {
 		$instance['php_code'] = current_user_can('unfiltered_html')
 			? $new_instance['php_code']
 			: $old_instance['php_code'];
+		$instance['float'] = in_array($new_instance['float'], array('left', 'right'))
+			? $new_instance['float']
+			: false;
 		
 		if ( $instance['php_condition'] && !trim($instance['php_code']) )
 			$instance['php_condition'] = false;
@@ -314,7 +332,7 @@ class ad_manager extends WP_Widget {
 			. esc_html($code)
 			. '</textarea>' . "\n";
 		
-		echo '<h3>' . __('Context', 'ad-manager') . '</h3>' . "\n";
+		echo '<h3>' . __('Ad Unit Context', 'ad-manager') . '</h3>' . "\n";
 		
 		echo '<p>'
 			. __('Only display this ad unit when any of these conditions are met:', 'ad-manager')
@@ -381,7 +399,63 @@ class ad_manager extends WP_Widget {
 				. '>'
 			. esc_html($php_code)
 			. '</textarea>' . "\n";
+		
+		echo '<div class="ad_manager_style">' . "\n";
+		
+		echo '<h3>' . __('Ad Unit Style', 'ad-manager') . '</h3>' . "\n";
+		
+		echo '<p>'
+			. '<label>'
+			. '<input type="radio" name="' . $this->get_field_name('float') . '" value=""'
+				. checked($float, '', false)
+				. ' />'
+			. '&nbsp;'
+			. __('Occupy the full available width', 'ad-manager')
+			. '</label>'
+			. '<br />' . "\n"
+			. '<label>'
+			. '<input type="radio" name="' . $this->get_field_name('float') . '" value="left"'
+				. checked($float, 'left', false)
+				. ' />'
+			. '&nbsp;'
+			. __('Float this ad unit to the left', 'ad-manager')
+			. '</label>'
+			. '<br />' . "\n"
+			. '<label>'
+			. '<input type="radio" name="' . $this->get_field_name('float') . '" value="right"'
+				. checked($float, 'right', false)
+				. ' />'
+			. '&nbsp;'
+			. __('Float this ad unit to the right', 'ad-manager')
+			. '</label>'
+			. '</p>' . "\n";
+		
+		echo '</div>' . "\n";
 	} # form()
+	
+	
+	/**
+	 * admin_styles()
+	 *
+	 * @return void
+	 **/
+
+	function admin_styles() {
+		echo <<<EOS
+
+<style type="text/css">
+.ad_manager_style {
+	display: none;
+}
+
+#inline_widgets .ad_manager_style,
+#the_entry .ad_manager_style {
+	display: block;
+}
+</style>
+
+EOS;
+	} # admin_styles()
 	
 	
 	/**
@@ -399,6 +473,7 @@ class ad_manager extends WP_Widget {
 			'casual_visitor' => false,
 			'php_condition' => false,
 			'php_code' => '',
+			'float' => false,
 			);
 	} # defaults()
 } # ad_manager
