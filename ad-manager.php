@@ -237,7 +237,7 @@ class ad_manager extends WP_Widget {
 		
 		if ( current_user_can('unfiltered_html') || is_preview() ) {
 			$code = '<div style="color: Black; background: GhostWhite; border: dotted 1px SteelBlue; padding: 20px;">' . "\n"
-				. sprintf(__('You\'re viewing a place holder for an ad unit (<code>%s</code>) because you are logged in. Please log out to see the real ad.', 'ad-manager'), $title)
+				. sprintf(__('This is a place holder for an ad unit (<code>%s</code>). Please log out to see the real ad.', 'ad-manager'), $title)
 				. '</div>' . "\n";
 		}
 		

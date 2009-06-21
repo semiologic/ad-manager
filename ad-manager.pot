@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2.0\n"
 "Report-Msgid-Bugs-To: https://tickets.semiologic.com\n"
-"POT-Creation-Date: 2009-06-10 21:08+0200\n"
+"POT-Creation-Date: 2009-06-21 13:30+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -27,8 +27,8 @@ msgstr ""
 #: ad-manager.php:240
 #, php-format
 msgid ""
-"You're viewing a place holder for an ad unit (<code>%s</code>) because you "
-"are logged in. Please log out to see the real ad."
+"This is a place holder for an ad unit (<code>%s</code>). Please log out to "
+"see the real ad."
 msgstr ""
 
 #: ad-manager.php:290
