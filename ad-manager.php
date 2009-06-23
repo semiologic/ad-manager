@@ -6,7 +6,7 @@ Description: A widget-based ad unit manager. Combine with inline widgets and wid
 Version: 2.0 RC
 Author: Denis de Bernardy
 Author URI: http://www.getsemiologic.com
-Text Domain: ad-manager-info
+Text Domain: ad-manager
 Domain Path: /lang
 */
 
