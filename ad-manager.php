@@ -503,14 +503,13 @@ EOS;
 			: false;
 
 		foreach ( $ops as $k => $o ) {
-			if ( isset($widget_contexts['ad_manager-' . $k]) ) {
-				$ops[$k]['widget_contexts'] = $widget_contexts['ad_manager-' . $k];
-				unset($widget_contexts['ad_manager-' . $k]);
+			if ( isset($widget_contexts['ad_unit-' . $k]) ) {
+				$ops[$k]['widget_contexts'] = $widget_contexts['ad_unit-' . $k];
+				unset($widget_contexts['ad_unit-' . $k]);
 			}
 		}
 		
-		if ( !defined('sem_install_test') )
-			update_option('widget_ad_manager', $ops);
+		update_option('widget_ad_manager', $ops);
 		
 		return $ops;
 	} # upgrade()
