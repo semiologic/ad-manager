@@ -510,6 +510,8 @@ EOS;
 		}
 		
 		update_option('widget_ad_manager', $ops);
+		if ( $widget_contexts !== false )
+			update_option('widget_contexts', $widget_contexts);
 		
 		return $ops;
 	} # upgrade()
