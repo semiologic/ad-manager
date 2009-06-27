@@ -515,7 +515,6 @@ EOS;
 		foreach ( $ops as $k => $o ) {
 			if ( isset($widget_contexts['ad_unit-' . $k]) ) {
 				$ops[$k]['widget_contexts'] = $widget_contexts['ad_unit-' . $k];
-				unset($widget_contexts['ad_unit-' . $k]);
 			}
 		}
 		
