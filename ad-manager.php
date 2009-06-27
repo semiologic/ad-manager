@@ -39,6 +39,27 @@ if ( !is_admin() ) {
 
 class ad_manager extends WP_Widget {
 	/**
+	 * init()
+	 *
+	 * @return void
+	 **/
+
+	function init() {
+		if ( get_option('widget_ad_unit') === false ) {
+			foreach ( array(
+				'ad_manager' => 'upgrade',
+				) as $ops => $method ) {
+				if ( get_option($ops) !== false ) {
+					$this->alt_option_name = $ops;
+					add_filter('option_' . $ops, array(get_class($this), $method));
+					break;
+				}
+			}
+		}
+	} # init()
+	
+	
+	/**
 	 * set_cookie()
 	 *
 	 * @return void
@@ -97,18 +118,7 @@ class ad_manager extends WP_Widget {
 			'width' => 430,
 			);
 		
-		if ( get_option('widget_ad_unit') === false ) {
-			foreach ( array(
-				'ad_manager' => 'upgrade',
-				) as $ops => $method ) {
-				if ( get_option($ops) !== false ) {
-					$this->alt_option_name = $ops;
-					add_filter('option_' . $ops, array('ad_manager', $method));
-					break;
-				}
-			}
-		}
-		
+		$this->init();
 		$this->WP_Widget('ad_unit', __('Ad Widget', 'ad-manager'), $widget_ops, $control_ops);
 	} # ad_manager()
 	
@@ -508,10 +518,6 @@ EOS;
 				unset($widget_contexts['ad_unit-' . $k]);
 			}
 		}
-		
-		update_option('widget_ad_unit', $ops);
-		if ( $widget_contexts !== false )
-			update_option('widget_contexts', $widget_contexts);
 		
 		return $ops;
 	} # upgrade()
