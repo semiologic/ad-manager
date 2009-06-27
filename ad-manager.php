@@ -97,7 +97,7 @@ class ad_manager extends WP_Widget {
 			'width' => 430,
 			);
 		
-		if ( get_option('widget_ad_manager') === false ) {
+		if ( get_option('widget_ad_unit') === false ) {
 			foreach ( array(
 				'ad_manager' => 'upgrade',
 				) as $ops => $method ) {
@@ -501,7 +501,7 @@ EOS;
 		$widget_contexts = class_exists('widget_contexts')
 			? get_option('widget_contexts')
 			: false;
-
+		
 		foreach ( $ops as $k => $o ) {
 			if ( isset($widget_contexts['ad_unit-' . $k]) ) {
 				$ops[$k]['widget_contexts'] = $widget_contexts['ad_unit-' . $k];
@@ -509,7 +509,7 @@ EOS;
 			}
 		}
 		
-		update_option('widget_ad_manager', $ops);
+		update_option('widget_ad_unit', $ops);
 		if ( $widget_contexts !== false )
 			update_option('widget_contexts', $widget_contexts);
 		
