@@ -3,7 +3,7 @@
 Plugin Name: Ad Manager
 Plugin URI: http://www.semiologic.com/software/ad-manager/
 Description: A widget-based ad unit manager. Combine with inline widgets and widget contexts to get the most of it.
-Version: 2.0 RC
+Version: 2.0 RC2
 Author: Denis de Bernardy
 Author URI: http://www.getsemiologic.com
 Text Domain: ad-manager
@@ -32,7 +32,7 @@ load_plugin_textdomain('ad-manager', null, dirname(__FILE__) . '/lang');
 add_action('widgets_init', array('ad_manager', 'widgets_init'));
 
 if ( !is_admin() ) {
-	add_action('init', array('ad_manager', 'set_cookie'));
+	add_action('wp', array('ad_manager', 'set_cookie'));
 } else {
 	add_action('admin_print_styles-widgets.php', array('ad_manager', 'admin_styles'));
 }
@@ -66,7 +66,7 @@ class ad_manager extends WP_Widget {
 	 **/
 
 	function set_cookie() {
-		if ( is_feed() || current_user_can('unfiltered_html') || defined('WP_CACHE') )
+		if ( is_feed() || is_404() || current_user_can('unfiltered_html') || is_preview() || defined('WP_CACHE') )
 			return;
 		
 		if ( !isset($_COOKIE['am_visit_counted_' . COOKIEHASH]) ) {
