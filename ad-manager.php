@@ -20,7 +20,7 @@ http://www.mesoconcepts.com/license/
 **/
 
 
-load_plugin_textdomain('ad-manager', null, dirname(__FILE__) . '/lang');
+load_plugin_textdomain('ad-manager', false, dirname(plugin_basename(__FILE__)) . '/lang');
 
 
 /**
