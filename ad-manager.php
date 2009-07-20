@@ -265,12 +265,35 @@ class ad_manager extends WP_Widget {
 				return;
 		}
 		
+		# google analytics integration
+		
+		static $track_ids = array();
+		$track_id = sanitize_title($title);
+		
+		if ( !$track_id )
+			$track_id = $widget_id;
+		
+		if ( isset($track_ids[$track_id]) ) {
+			$i = 2;
+			while ( isset($track_ids["$track_id-$i"]) )
+				$i++;
+			$track_id = "$track_id-$i";
+		}
+		
+		$track_ids[$track_id] = true;
+		
 		# editors see place holders so they don't click on their own ads, as do authors on drafts
 		
 		if ( current_user_can('unfiltered_html') || is_preview() ) {
 			$code = '<div style="color: Black; background: GhostWhite; border: dotted 1px SteelBlue; padding: 20px;">' . "\n"
-				. sprintf(__('Please log out to see this ad unit (<code>%s</code>).', 'ad-manager'), $title)
+				. '<p>' . __('Please log out to see this ad unit:', 'ad-manager') . '</p>' . "\n"
+				. '<p><code>' . $title . '</code>'
+				. '<p>' . sprintf(__('<a href="%1$s">Google Analytics</a> will track clicks on it as:'), 'http://www.semiologic.com/software/google-analytics/') . '</p>' . "\n"
+				. '<p><code>/ad-clicks/' . $track_id . '</code></p>' . "\n"
 				. '</div>' . "\n";
+		} else {
+			$code = '<input type="hidden" class="track_id" value="' . esc_attr($track_id) . '" />' . "\n"
+				. $code;
 		}
 		
 		# apply style preferences
