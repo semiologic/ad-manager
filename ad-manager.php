@@ -267,44 +267,51 @@ class ad_manager extends WP_Widget {
 		
 		# google analytics integration
 		
-		static $track_ids = array();
-		$track_id = sanitize_title($title);
+		static $event_ids = array();
+		$event_id = trim($title);
 		
-		if ( !$track_id )
-			$track_id = $widget_id;
+		if ( !$event_id )
+			$event_id = $widget_id;
 		
-		if ( isset($track_ids[$track_id]) ) {
+		if ( isset($event_ids[$event_id]) ) {
 			$i = 2;
-			while ( isset($track_ids["$track_id-$i"]) )
+			while ( isset($event_ids["$event_id-$i"]) )
 				$i++;
-			$track_id = "$track_id-$i";
+			$event_id = "$event_id-$i";
 		}
 		
-		$track_ids[$track_id] = true;
+		$event_ids[$event_id] = true;
 		
 		# editors see place holders so they don't click on their own ads, as do authors on drafts
 		
 		if ( current_user_can('unfiltered_html') || is_preview() ) {
-			$code = '<div style="color: Black; background: GhostWhite; border: dotted 1px SteelBlue; padding: 20px;">' . "\n"
+			$code = '<div style="color: #000; background: #F8F8FF; border: dotted 1px #4682B4; padding: 20px;">' . "\n"
 				. '<p>' . __('Please log out to see this ad unit:', 'ad-manager') . '</p>' . "\n"
-				. '<p><code>' . $title . '</code>'
-				. '<p>' . sprintf(__('<a href="%1$s">Google Analytics</a> will track clicks on it as:'), 'http://www.semiologic.com/software/google-analytics/') . '</p>' . "\n"
-				. '<p><code>/ad-clicks/' . $track_id . '</code></p>' . "\n"
+				. '<p><code>' . $title . '</code></p>' . "\n"
 				. '</div>' . "\n";
+			if ( defined('sem_google_analytics_debug') )
+				$ga_tracker = '<input type="hidden" class="event_label" value="' . esc_attr($event_id) . '" />';
+			else
+				$ga_tracker = '';
 		} else {
-			$code = '<input type="hidden" class="track_id" value="' . esc_attr($track_id) . '" />' . "\n"
-				. $code;
+			$ga_tracker = '<input type="hidden" class="event_label" value="' . esc_attr($event_id) . '" />';
 		}
 		
 		# apply style preferences
-
+		
 		if ( $float && in_array($id, array('inline_widgets', 'the_entry')) ) {
-			$code = '<div style="'
+			$code = '<div class="ad_event" style="'
 				. ( $float == 'left'
 					? 'float: left; margin: 0px .5em .1em 0px;'
 					: 'float: right; margin: 0px 0px .1em .5em;'
 					)
 				. '">' . "\n"
+				. $ga_tracker
+				. $code
+				. '</div>' . "\n";
+		} else {
+			$code = '<div class="ad_event">' . "\n"
+				. $ga_tracker
 				. $code
 				. '</div>' . "\n";
 		}
