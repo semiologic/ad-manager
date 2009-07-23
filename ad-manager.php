@@ -289,7 +289,7 @@ class ad_manager extends WP_Widget {
 				. '<p>' . __('Please log out to see this ad unit:', 'ad-manager') . '</p>' . "\n"
 				. '<p><code>' . $title . '</code></p>' . "\n"
 				. '</div>' . "\n";
-			if ( defined('sem_google_analytics_debug') )
+			if ( defined('sem_google_analytics_debug') && sem_google_analytics_debug )
 				$ga_tracker = '<input type="hidden" class="event_label" value="' . esc_attr($event_id) . '" />';
 			else
 				$ga_tracker = '';
