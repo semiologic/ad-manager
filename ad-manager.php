@@ -310,7 +310,7 @@ class ad_manager extends WP_Widget {
 				. $code
 				. '</div>' . "\n";
 		} else {
-			$code = '<div class="ad_event">' . "\n"
+			$code = '<div class="ad_event" align="center">' . "\n"
 				. $ga_tracker
 				. $code
 				. '</div>' . "\n";
