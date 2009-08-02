@@ -29,14 +29,6 @@ load_plugin_textdomain('ad-manager', false, dirname(plugin_basename(__FILE__)) .
  * @package Ad Manager
  **/
 
-add_action('widgets_init', array('ad_manager', 'widgets_init'));
-
-if ( !is_admin() ) {
-	add_action('wp', array('ad_manager', 'set_cookie'));
-} else {
-	add_action('admin_print_styles-widgets.php', array('ad_manager', 'admin_styles'));
-}
-
 class ad_manager extends WP_Widget {
 	/**
 	 * init()
@@ -551,4 +543,12 @@ EOS;
 		return $ops;
 	} # upgrade()
 } # ad_manager
+
+add_action('widgets_init', array('ad_manager', 'widgets_init'));
+
+if ( !is_admin() ) {
+	add_action('wp', array('ad_manager', 'set_cookie'));
+} else {
+	add_action('admin_print_styles-widgets.php', array('ad_manager', 'admin_styles'));
+}
 ?>
