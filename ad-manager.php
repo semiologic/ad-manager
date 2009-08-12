@@ -432,7 +432,8 @@ class ad_manager extends WP_Widget {
 				. ' />'
 			. '&nbsp;'
 			. __('The following php condition (<a href="http://codex.wordpress.org/Conditional_Tags" target="_blank">WordPress conditional tags</a>) is met:', 'ad-manager')
-			. '</label>' . '</p>' . "\n";
+			. '</label>'
+			. '</p>' . "\n";
 		
 		echo '<textarea class="widefat code" rows="3" cols="20" name="ad_unit[' . $number .'][php_code]"'
 				. ' onchange="if ( this.value ) document.getElementById(\'' . $this->get_field_id('php_condition') . '\').checked = true; else document.getElementById(\'' . $this->get_field_id('php_condition') . '\').checked = false;"'
