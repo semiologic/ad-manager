@@ -251,6 +251,9 @@ class ad_manager extends WP_Widget {
 					if ( ++$adsense_units > 3 )
 						return;
 				}
+			} else {
+				if ( ++$adsense_units > 3 )
+					return;
 			}
 		} elseif ( strpos($code, 'ctxt_ad_partner') !== false ) {
 			if ( ++$ypn_units > 3 )
