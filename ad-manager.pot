@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2.0\n"
 "Report-Msgid-Bugs-To: https://tickets.semiologic.com\n"
-"POT-Creation-Date: 2009-08-03 18:31+0200\n"
+"POT-Creation-Date: 2009-09-14 19:12+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -34,61 +34,61 @@ msgstr ""
 msgid "Ad Widget"
 msgstr ""
 
-#: ad-manager.php:281
+#: ad-manager.php:284
 msgid "Please log out to see this ad unit:"
 msgstr ""
 
-#: ad-manager.php:360
+#: ad-manager.php:363
 msgid "Title (never displayed to visitors)"
 msgstr ""
 
-#: ad-manager.php:379
+#: ad-manager.php:382
 msgid "Ad Unit Context"
 msgstr ""
 
-#: ad-manager.php:382
-msgid "Only display this ad unit when any of these conditions are met:"
+#: ad-manager.php:385
+msgid "Display this ad unit only the following conditions are met:"
 msgstr ""
 
-#: ad-manager.php:394
+#: ad-manager.php:397
 msgid "The visitor comes from a search engine"
 msgstr ""
 
-#: ad-manager.php:407
+#: ad-manager.php:410
 msgid "The post (not page) is more that 2 weeks old"
 msgstr ""
 
-#: ad-manager.php:420
+#: ad-manager.php:423
 msgid ""
 "The visitor is not a regular reader (three visits in the past two weeks)"
 msgstr ""
 
-#: ad-manager.php:434
+#: ad-manager.php:437
 msgid ""
 "The following php condition (<a href=\"http://codex.wordpress.org/"
 "Conditional_Tags\" target=\"_blank\">WordPress conditional tags</a>) is met:"
 msgstr ""
 
-#: ad-manager.php:449
+#: ad-manager.php:453
 msgid "Ad Unit Style"
 msgstr ""
 
-#: ad-manager.php:457
+#: ad-manager.php:461
 msgid "Occupy the full available width"
 msgstr ""
 
-#: ad-manager.php:465
+#: ad-manager.php:469
 msgid "Float this ad unit to the left"
 msgstr ""
 
-#: ad-manager.php:473
+#: ad-manager.php:477
 msgid "Float this ad unit to the right"
 msgstr ""
 
-#: ad-manager.php:513
+#: ad-manager.php:517
 msgid "Ad Unit"
 msgstr ""
 
-#: ad-manager.php:514
+#: ad-manager.php:518
 msgid "Enter your ad unit code here"
 msgstr ""

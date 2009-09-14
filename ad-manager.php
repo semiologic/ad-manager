@@ -3,7 +3,7 @@
 Plugin Name: Ad Manager
 Plugin URI: http://www.semiologic.com/software/ad-manager/
 Description: A widget-based ad unit manager. Combine with Inline Widgets and Google Analytics to get the most of it.
-Version: 2.0 RC2
+Version: 2.0
 Author: Denis de Bernardy
 Author URI: http://www.getsemiologic.com
 Text Domain: ad-manager
@@ -382,7 +382,7 @@ class ad_manager extends WP_Widget {
 		echo '<h3>' . __('Ad Unit Context', 'ad-manager') . '</h3>' . "\n";
 		
 		echo '<p>'
-			. __('Only display this ad unit when any of these conditions are met:', 'ad-manager')
+			. __('Display this ad unit only the following conditions are met:', 'ad-manager')
 			. '</p>' . "\n";
 		
 		echo '<p>'
