@@ -3,7 +3,7 @@
 Plugin Name: Ad Manager
 Plugin URI: http://www.semiologic.com/software/ad-manager/
 Description: A widget-based ad unit manager. Combine with Inline Widgets and Google Analytics to get the most of it.
-Version: 2.0
+Version: 2.1 beta
 Author: Denis de Bernardy
 Author URI: http://www.getsemiologic.com
 Text Domain: ad-manager
@@ -30,6 +30,19 @@ load_plugin_textdomain('ad-manager', false, dirname(plugin_basename(__FILE__)) .
  **/
 
 class ad_manager extends WP_Widget {
+	/**
+	 * scripts()
+	 *
+	 * @return void
+	 **/
+
+	function scripts() {
+		if ( current_user_can('publish_posts') || current_user_can('publish_pages') ) {
+			$folder = plugin_dir_url(__FILE__);
+			wp_enqueue_script('ad-manager', $folder . 'js/scripts.js', array('jquery'), '20091012', true);
+		}
+	} # scripts()
+	
 	/**
 	 * init()
 	 *
@@ -277,19 +290,18 @@ class ad_manager extends WP_Widget {
 		
 		$event_ids[$event_id] = true;
 		
-		# editors see place holders so they don't click on their own ads, as do authors on drafts
+		$ga_tracker = '<input type="hidden" class="event_label" value="' . esc_attr($event_id) . '" />';
 		
-		if ( current_user_can('unfiltered_html') || is_preview() ) {
-			$code = '<div style="color: #000; background: #F8F8FF; border: dotted 1px #4682B4; padding: 20px;">' . "\n"
-				. '<p>' . __('Please log out to see this ad unit:', 'ad-manager') . '</p>' . "\n"
-				. '<p><code>' . $title . '</code></p>' . "\n"
-				. '</div>' . "\n";
-			if ( defined('sem_google_analytics_debug') && sem_google_analytics_debug )
-				$ga_tracker = '<input type="hidden" class="event_label" value="' . esc_attr($event_id) . '" />';
-			else
-				$ga_tracker = '';
-		} else {
-			$ga_tracker = '<input type="hidden" class="event_label" value="' . esc_attr($event_id) . '" />';
+		$info = '';
+		
+		# never show ads on unpublished pages
+		
+		if ( is_preview() ) {
+			$code = '<div class="ad_info" style="display: none; color: #000; background: #f8f8ff; border: dotted 1px #4682b4;"><p>' . sprintf(__('Please publish to see this Ad Unit: %s', 'ad-manager'), '<code>' . $event_id . '</code>') . '</p></div>';
+			$ga_tracker = '';
+		} elseif ( current_user_can('publish_posts') || current_user_can('publish_pages') ) {
+			$code = '<div class="ad_code">' . $code . '</div>';
+			$info = '<div class="ad_info" style="display: none; color: #000; background: #f8f8ff; border: dotted 1px #4682b4;" title="' . esc_attr(sprintf(__('Ad Unit: %s', 'ad-manager'), $event_id)) . '"><p>' . sprintf(__('Ad Unit: %s', 'ad-manager'), '<code>' . $event_id . '</code>') . '</p></div>';
 		}
 		
 		# apply style preferences
@@ -303,11 +315,13 @@ class ad_manager extends WP_Widget {
 				. '">' . "\n"
 				. $ga_tracker
 				. $code
+				. $info
 				. '</div>' . "\n";
 		} else {
 			$code = '<div class="ad_event" align="center">' . "\n"
 				. $ga_tracker
 				. $code
+				. $info
 				. '</div>' . "\n";
 		}
 		
@@ -552,6 +566,7 @@ add_action('widgets_init', array('ad_manager', 'widgets_init'));
 
 if ( !is_admin() ) {
 	add_action('wp', array('ad_manager', 'set_cookie'));
+	add_action('wp_print_scripts', array('ad_manager', 'scripts'));
 } else {
 	add_action('admin_print_styles-widgets.php', array('ad_manager', 'admin_styles'));
 }
