@@ -3,14 +3,18 @@ jQuery(document).ready(function() {
 		var unit = jQuery(this).find('div.ad_event');
 		var hide = unit.find('div.ad_code');
 		var show = unit.find('div.ad_info');
-		show.css('width', parseInt(hide.width()) - 2).css('height', parseInt(hide.height()) - 2);
-		show.show();
-		hide.hide();
+		if ( show.size() && hide.size() ) {
+			show.css('width', parseInt(hide.width()) - 2).css('height', parseInt(hide.height()) - 2);
+			show.show();
+			hide.hide();
+		}
 	}, function() {
 		var unit = jQuery(this).find('div.ad_event');
 		var show = unit.find('div.ad_code');
 		var hide = unit.find('div.ad_info');
-		show.show();
-		hide.hide();
+		if ( show.size() && hide.size() ) {
+			show.show();
+			hide.hide();
+		}
 	});
 });

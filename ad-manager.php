@@ -297,7 +297,7 @@ class ad_manager extends WP_Widget {
 		# never show ads on unpublished pages
 		
 		if ( is_preview() ) {
-			$code = '<div class="ad_info" style="display: none; color: #000; background: #f8f8ff; border: dotted 1px #4682b4;"><p>' . sprintf(__('Please publish to see this Ad Unit: %s', 'ad-manager'), '<code>' . $event_id . '</code>') . '</p></div>';
+			$code = '<div class="ad_info" style="color: #000; background: #f8f8ff; border: dotted 1px #4682b4;"><p>' . sprintf(__('Please publish to see this Ad Unit: %s', 'ad-manager'), '<code>' . $event_id . '</code>') . '</p></div>';
 			$ga_tracker = '';
 		} elseif ( current_user_can('publish_posts') || current_user_can('publish_pages') ) {
 			$code = '<div class="ad_code">' . $code . '</div>';
