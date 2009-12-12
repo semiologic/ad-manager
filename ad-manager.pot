@@ -6,9 +6,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: 2.1\n"
+"Project-Id-Version: 2.1.1\n"
 "Report-Msgid-Bugs-To: https://tickets.semiologic.com\n"
-"POT-Creation-Date: 2009-10-12 10:51+0200\n"
+"POT-Creation-Date: 2009-12-12 19:27+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -26,75 +26,75 @@ msgid ""
 "Analytics to get the most of it."
 msgstr ""
 
-#: ad-manager.php:120
+#: ad-manager.php:112
 msgid "An ad unit. Combine with Inline Widgets for use in posts."
 msgstr ""
 
-#: ad-manager.php:127
+#: ad-manager.php:119
 msgid "Ad Widget"
 msgstr ""
 
-#: ad-manager.php:300
+#: ad-manager.php:295
 #, php-format
 msgid "Please publish to see this Ad Unit: %s"
 msgstr ""
 
-#: ad-manager.php:304
+#: ad-manager.php:303
 #, php-format
 msgid "Ad Unit: %s"
 msgstr ""
 
-#: ad-manager.php:377
+#: ad-manager.php:378
 msgid "Title (never displayed to visitors)"
 msgstr ""
 
-#: ad-manager.php:396
+#: ad-manager.php:397
 msgid "Ad Unit Context"
 msgstr ""
 
-#: ad-manager.php:399
-msgid "Display this ad unit only the following conditions are met:"
+#: ad-manager.php:400
+msgid "Display this ad unit only when the following conditions are met:"
 msgstr ""
 
-#: ad-manager.php:411
+#: ad-manager.php:412
 msgid "The visitor comes from a search engine"
 msgstr ""
 
-#: ad-manager.php:424
+#: ad-manager.php:425
 msgid "The post (not page) is more that 2 weeks old"
 msgstr ""
 
-#: ad-manager.php:437
+#: ad-manager.php:438
 msgid ""
 "The visitor is not a regular reader (three visits in the past two weeks)"
 msgstr ""
 
-#: ad-manager.php:451
+#: ad-manager.php:452
 msgid ""
 "The following php condition (<a href=\"http://codex.wordpress.org/"
 "Conditional_Tags\" target=\"_blank\">WordPress conditional tags</a>) is met:"
 msgstr ""
 
-#: ad-manager.php:467
+#: ad-manager.php:468
 msgid "Ad Unit Style"
 msgstr ""
 
-#: ad-manager.php:475
+#: ad-manager.php:476
 msgid "Occupy the full available width"
 msgstr ""
 
-#: ad-manager.php:483
+#: ad-manager.php:484
 msgid "Float this ad unit to the left"
 msgstr ""
 
-#: ad-manager.php:491
+#: ad-manager.php:492
 msgid "Float this ad unit to the right"
 msgstr ""
 
-#: ad-manager.php:531
+#: ad-manager.php:532
 msgid "Ad Unit"
 msgstr ""
 
-#: ad-manager.php:532
+#: ad-manager.php:533
 msgid "Enter your ad unit code here"
 msgstr ""

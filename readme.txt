@@ -112,6 +112,10 @@ The [Semiologic forum](http://forum.semiologic.com) is the best place to report 
 
 == Change Log ==
 
+= 2.1.1 =
+
+- Improve cache support
+
 = 2.1. =
 
 - JS-based click protection, to allow for proper preview of units

@@ -3,7 +3,7 @@
 Plugin Name: Ad Manager
 Plugin URI: http://www.semiologic.com/software/ad-manager/
 Description: A widget-based ad unit manager. Combine with Inline Widgets and Google Analytics to get the most of it.
-Version: 2.1
+Version: 2.1.1 alpha
 Author: Denis de Bernardy
 Author URI: http://www.getsemiologic.com
 Text Domain: ad-manager
@@ -40,8 +40,33 @@ class ad_manager extends WP_Widget {
 		if ( current_user_can('publish_posts') || current_user_can('publish_pages') ) {
 			$folder = plugin_dir_url(__FILE__);
 			wp_enqueue_script('ad-manager', $folder . 'js/scripts.js', array('jquery'), '20091012', true);
+		} elseif ( !is_feed() && !is_404() && !is_preview() ) {
+			$check_cookie = 'am_checked_' . COOKIEHASH;
+			$count_cookie = 'am_visits_' . COOKIEHASH;
+			$regular_cookie = 'am_regulars_' . COOKIEHASH;
+			$cookie_path = COOKIEPATH;
+			echo <<<EOS
+
+<script type="text/javascript">
+if ( !document.cookie.match(/$check_cookie/) ) {
+	var am_count = document.cookie.match(/(?:^|;)\s*$count_cookie=([^;]*)(?:;|$)/);
+	if ( am_count )
+		am_count = unescape(am_count[1]);
+	am_count = parseInt(am_count);
+	am_count = am_count ? am_count + 1 : 1;
+	var am_expires = new Date();
+	am_expires.setTime(am_expires.getTime() + 14 * 24 * 3600);
+	document.cookie = "$check_cookie=1;path=$cookie_path";
+	document.cookie = "$count_cookie=" + escape(am_count) + ";path=$cookie_path;expires=" + am_expires.toGMTString();
+	if ( am_count >= 3 )
+		document.cookie = "$regular_cookie=1;path=$cookie_path;expires=" + am_expires.toGMTString();
+}
+</script>
+
+EOS;
 		}
 	} # scripts()
+	
 	
 	/**
 	 * init()
@@ -62,39 +87,6 @@ class ad_manager extends WP_Widget {
 			}
 		}
 	} # init()
-	
-	
-	/**
-	 * set_cookie()
-	 *
-	 * @return void
-	 **/
-
-	function set_cookie() {
-		if ( is_feed() || is_404() || current_user_can('unfiltered_html') || is_preview() || defined('WP_CACHE') )
-			return;
-		
-		if ( !isset($_COOKIE['am_visit_counted_' . COOKIEHASH]) ) {
-			return;
-			
-			# count visit (and expire in two weeks)
-			setcookie(
-				'am_visits_' . COOKIEHASH,
-				$_COOKIE['am_visits_' . COOKIEHASH]++,
-				time() + 14 * 86400,
-				COOKIEPATH,
-				COOKIE_DOMAIN
-				);
-			
-			setcookie(
-				'am_visit_counted_' . COOKIEHASH,
-				1,
-				null,
-				COOKIEPATH,
-				COOKIE_DOMAIN
-				);
-		}
-	} # set_cookie()
 	
 	
 	/**
@@ -157,7 +149,7 @@ class ad_manager extends WP_Widget {
 		# precondition: irregular visitor
 		
 		if ( $casual_visitor ) {
-			if ( !defined('WP_CACHE') && $_COOKIE['am_visits_' . COOKIEHASH] > 3 )
+			if ( !empty($_COOKIE['am_visits_' . COOKIEHASH]) && $_COOKIE['am_visits_' . COOKIEHASH] > 3 )
 				return;
 		}
 		
@@ -296,12 +288,21 @@ class ad_manager extends WP_Widget {
 		
 		# never show ads on unpublished pages
 		
+		$style = 'color: #000; background: #f8f8ff; border: dotted 1px #4682b4;';
 		if ( is_preview() ) {
-			$code = '<div class="ad_info" style="color: #000; background: #f8f8ff; border: dotted 1px #4682b4;"><p>' . sprintf(__('Please publish to see this Ad Unit: %s', 'ad-manager'), '<code>' . $event_id . '</code>') . '</p></div>';
+			$code = '<div class="ad_info" style="' . $style .'">'
+				. sprintf(
+					__('Please publish to see this Ad Unit: %s', 'ad-manager'),
+					'<code>' . $event_id . '</code>')
+				. '</div>';
 			$ga_tracker = '';
 		} elseif ( current_user_can('publish_posts') || current_user_can('publish_pages') ) {
 			$code = '<div class="ad_code">' . $code . '</div>';
-			$info = '<div class="ad_info" style="display: none; color: #000; background: #f8f8ff; border: dotted 1px #4682b4;" title="' . esc_attr(sprintf(__('Ad Unit: %s', 'ad-manager'), $event_id)) . '"><p>' . sprintf(__('Ad Unit: %s', 'ad-manager'), '<code>' . $event_id . '</code>') . '</p></div>';
+			$info = '<div class="ad_info" style="display: none; ' . $style . '">'
+				. sprintf(
+					__('Ad Unit: %s', 'ad-manager'),
+					'<code>' . $event_id . '</code>')
+				. '</div>';
 		}
 		
 		# apply style preferences
@@ -396,7 +397,7 @@ class ad_manager extends WP_Widget {
 		echo '<h3>' . __('Ad Unit Context', 'ad-manager') . '</h3>' . "\n";
 		
 		echo '<p>'
-			. __('Display this ad unit only the following conditions are met:', 'ad-manager')
+			. __('Display this ad unit only when the following conditions are met:', 'ad-manager')
 			. '</p>' . "\n";
 		
 		echo '<p>'
@@ -560,12 +561,25 @@ EOS;
 		
 		return $ops;
 	} # upgrade()
+	
+	
+	/**
+	 * sem_cache_cookies()
+	 *
+	 * @param array $cookies
+	 * @return array $cookies
+	 **/
+
+	function sem_cache_cookies($cookies) {
+		$cookies[] = 'am_regulars_' . COOKIEHASH;
+		return $cookies;
+	} # sem_cache_cookies()
 } # ad_manager
 
 add_action('widgets_init', array('ad_manager', 'widgets_init'));
+add_filter('sem_cache_cookies', array('ad_manager', 'sem_cache_cookies'));
 
 if ( !is_admin() ) {
-	add_action('wp', array('ad_manager', 'set_cookie'));
 	add_action('wp_print_scripts', array('ad_manager', 'scripts'));
 } else {
 	add_action('admin_print_styles-widgets.php', array('ad_manager', 'admin_styles'));
