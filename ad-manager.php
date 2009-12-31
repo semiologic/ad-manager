@@ -372,7 +372,7 @@ EOS;
 	function form($instance) {
 		$instance = wp_parse_args($instance, ad_manager::defaults());
 		extract($instance, EXTR_SKIP);
-	
+		
 		echo '<p>'
 			. '<label>'
 			. __('Title (never displayed to visitors)', 'ad-manager') . '<br />'
@@ -453,7 +453,7 @@ EOS;
 			. '</label>'
 			. '</p>' . "\n";
 		
-		echo '<textarea class="widefat code" rows="3" cols="20" name="ad_unit[' . $number .'][php_code]"'
+		echo '<textarea class="widefat code" rows="3" cols="20" name="' . $this->get_field_name('php_code') . '" id="' . $this->get_field_id('php_code') . '"'
 				. ' onchange="if ( this.value ) document.getElementById(\'' . $this->get_field_id('php_condition') . '\').checked = true; else document.getElementById(\'' . $this->get_field_id('php_condition') . '\').checked = false;"'
 				. ( !current_user_can('unfiltered_html')
 					? ' disabled="disabled"'

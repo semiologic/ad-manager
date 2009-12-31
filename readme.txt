@@ -115,6 +115,7 @@ The [Semiologic forum](http://forum.semiologic.com) is the best place to report 
 = 2.1.1 =
 
 - Improve cache support
+- Fix php condition handler
 
 = 2.1. =
 
