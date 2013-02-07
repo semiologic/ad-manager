@@ -3,8 +3,8 @@
 Plugin Name: Ad Manager
 Plugin URI: http://www.semiologic.com/software/ad-manager/
 Description: A widget-based ad unit manager. Combine with Inline Widgets and Google Analytics to get the most of it.
-Version: 2.1.1
-Author: Denis de Bernardy
+Version: 2.1.2
+Author: Denis de Bernardy & Mike Koepke
 Author URI: http://www.getsemiologic.com
 Text Domain: ad-manager
 Domain Path: /lang
@@ -26,6 +26,7 @@ load_plugin_textdomain('ad-manager', false, dirname(plugin_basename(__FILE__)) .
 /**
  * ad_manager
  *
+ * @property int|string alt_option_name
  * @package Ad Manager
  **/
 
@@ -221,7 +222,6 @@ EOS;
 		
 		# https://www.google.com/adsense/support/bin/answer.py?answer=48182#pla
 		static $adsense_units = 0;
-		static $adsense_images = 0;
 		static $adsense_links = 0;
 		static $adsense_referrals = 0;
 		static $google_site_searches = 0;
