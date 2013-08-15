@@ -3,7 +3,7 @@ Contributors: Denis-de-Bernardy, Mike_Koepke
 Donate link: http://www.semiologic.com/partners/
 Tags: semiologic
 Requires at least: 2.8
-Tested up to: 3.5.1
+Tested up to: 3.6
 Stable tag: trunk
 
 A widget-driven ad manager, suitable for AdSense, YPN, and many more.
@@ -111,6 +111,11 @@ The [Semiologic forum](http://forum.semiologic.com) is the best place to report 
 
 
 == Change Log ==
+
+= 2.2 =
+
+- WP 3.6 compat
+- PHP 5.4 compat
 
 = 2.1.2 =
 

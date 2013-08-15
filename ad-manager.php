@@ -3,7 +3,7 @@
 Plugin Name: Ad Manager
 Plugin URI: http://www.semiologic.com/software/ad-manager/
 Description: A widget-based ad unit manager. Combine with Inline Widgets and Google Analytics to get the most of it.
-Version: 2.1.2
+Version: 2.2
 Author: Denis de Bernardy & Mike Koepke
 Author URI: http://www.getsemiologic.com
 Text Domain: ad-manager
@@ -31,7 +31,33 @@ load_plugin_textdomain('ad-manager', false, dirname(plugin_basename(__FILE__)) .
  **/
 
 class ad_manager extends WP_Widget {
-	/**
+    /**
+     * ad_manager()
+     */
+    function ad_manager () {
+        add_action('widgets_init', array($this, 'widgets_init'));
+        add_filter('sem_cache_cookies', array($this, 'sem_cache_cookies'));
+
+        if ( !is_admin() ) {
+        	add_action('wp_print_scripts', array($this, 'scripts'));
+        } else {
+        	add_action('admin_print_styles-widgets.php', array($this, 'admin_styles'));
+        }
+
+        $widget_ops = array(
+      			'classname' => 'ad_unit',
+      			'description' => __('An ad unit. Combine with Inline Widgets for use in posts.', 'ad-manager'),
+      			);
+      		$control_ops = array(
+      			'width' => 430,
+      			);
+
+      		$this->init();
+      		$this->WP_Widget('ad_unit', __('Ad Widget', 'ad-manager'), $widget_ops, $control_ops);
+    } # ad_manager
+
+
+    /**
 	 * scripts()
 	 *
 	 * @return void
@@ -99,28 +125,7 @@ EOS;
 	function widgets_init() {
 		register_widget('ad_manager');
 	} # widgets_init()
-	
-	
-	/**
-	 * ad_manager()
-	 *
-	 * @return void
-	 **/
 
-	function ad_manager() {
-		$widget_ops = array(
-			'classname' => 'ad_unit',
-			'description' => __('An ad unit. Combine with Inline Widgets for use in posts.', 'ad-manager'),
-			);
-		$control_ops = array(
-			'width' => 430,
-			);
-		
-		$this->init();
-		$this->WP_Widget('ad_unit', __('Ad Widget', 'ad-manager'), $widget_ops, $control_ops);
-	} # ad_manager()
-	
-	
 	/**
 	 * widget()
 	 *
@@ -307,7 +312,7 @@ EOS;
 		
 		# apply style preferences
 		
-		if ( $float && in_array($id, array('inline_widgets', 'the_entry')) ) {
+		if ( $float && in_array($id, array($this, 'the_entry')) ) {
 			$code = '<div class="ad_event" style="'
 				. ( $float == 'left'
 					? 'float: left; margin: 0px .5em .1em 0px;'
@@ -576,12 +581,6 @@ EOS;
 	} # sem_cache_cookies()
 } # ad_manager
 
-add_action('widgets_init', array('ad_manager', 'widgets_init'));
-add_filter('sem_cache_cookies', array('ad_manager', 'sem_cache_cookies'));
+$ad_manager = new ad_manager();
 
-if ( !is_admin() ) {
-	add_action('wp_print_scripts', array('ad_manager', 'scripts'));
-} else {
-	add_action('admin_print_styles-widgets.php', array('ad_manager', 'admin_styles'));
-}
 ?>
