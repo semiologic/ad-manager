@@ -3,20 +3,19 @@
 Plugin Name: Ad Manager
 Plugin URI: http://www.semiologic.com/software/ad-manager/
 Description: A widget-based ad unit manager. Combine with Inline Widgets and Google Analytics to get the most of it.
-Version: 2.2
+Version: 2.3
 Author: Denis de Bernardy & Mike Koepke
 Author URI: http://www.getsemiologic.com
 Text Domain: ad-manager
 Domain Path: /lang
+License: Dual licensed under the MIT and GPLv2 licenses
 */
 
 /*
 Terms of use
 ------------
 
-This software is copyright Mesoconcepts (http://www.mesoconcepts.com), and is distributed under the terms of the Mesoconcepts license. In a nutshell, you may freely use it for any purpose, but may not redistribute it without written permission.
-
-http://www.mesoconcepts.com/license/
+This software is copyright Denis de Bernardy & Mike Koepke, and is distributed under the terms of the MIT and GPLv2 licenses.
 **/
 
 
@@ -34,7 +33,7 @@ class ad_manager extends WP_Widget {
     /**
      * ad_manager()
      */
-    function ad_manager () {
+	public function __construct() {
         add_action('widgets_init', array($this, 'widgets_init'));
         add_filter('sem_cache_cookies', array($this, 'sem_cache_cookies'));
 
@@ -52,8 +51,8 @@ class ad_manager extends WP_Widget {
       			'width' => 430,
       			);
 
-      		$this->init();
-      		$this->WP_Widget('ad_unit', __('Ad Widget', 'ad-manager'), $widget_ops, $control_ops);
+        $this->init();
+        $this->WP_Widget('ad_unit', __('Ad Widget', 'ad-manager'), $widget_ops, $control_ops);
     } # ad_manager
 
 
@@ -193,6 +192,12 @@ EOS;
 						|
 							yahoo
 						|
+							bing
+						|
+							baidu
+						|
+							yandex
+						|
 							search
 						|
 							soso
@@ -219,7 +224,7 @@ EOS;
 		#	dump($php_code);
 			eval("\$bool = ( $php_code );");
 			
-			if ( !$bool )
+			if ( !is_null($bool) && !$bool )
 				return;
 		}
 		
@@ -582,5 +587,3 @@ EOS;
 } # ad_manager
 
 $ad_manager = new ad_manager();
-
-?>

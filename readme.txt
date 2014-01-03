@@ -1,9 +1,9 @@
 === Ad Manager ===
 Contributors: Denis-de-Bernardy, Mike_Koepke
 Donate link: http://www.semiologic.com/partners/
-Tags: semiologic
+Tags: semiologic, ads, adsense
 Requires at least: 2.8
-Tested up to: 3.6
+Tested up to: 3.8
 Stable tag: trunk
 
 A widget-driven ad manager, suitable for AdSense, YPN, and many more.
@@ -111,6 +111,12 @@ The [Semiologic forum](http://forum.semiologic.com) is the best place to report 
 
 
 == Change Log ==
+
+= 2.3 =
+
+- Fix issue where ads wouldn't be displayed if the condition was not actual php code.
+- Added bing, baidu and yandex to search engine referrers.
+- WP 3.8 compat
 
 = 2.2 =
 
