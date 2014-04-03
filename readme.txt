@@ -112,6 +112,10 @@ The [Semiologic forum](http://forum.semiologic.com) is the best place to report 
 
 == Change Log ==
 
+= 2.4 =
+
+- Code refactoring
+
 = 2.3 =
 
 - Fix issue where ads wouldn't be displayed if the condition was not actual php code.

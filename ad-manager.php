@@ -3,7 +3,7 @@
 Plugin Name: Ad Manager
 Plugin URI: http://www.semiologic.com/software/ad-manager/
 Description: A widget-based ad unit manager. Combine with Inline Widgets and Google Analytics to get the most of it.
-Version: 2.3
+Version: 2.4 dev
 Author: Denis de Bernardy & Mike Koepke
 Author URI: http://www.getsemiologic.com
 Text Domain: ad-manager
@@ -19,8 +19,6 @@ This software is copyright Denis de Bernardy & Mike Koepke, and is distributed u
 **/
 
 
-load_plugin_textdomain('ad-manager', false, dirname(plugin_basename(__FILE__)) . '/lang');
-
 
 /**
  * ad_manager
@@ -30,18 +28,74 @@ load_plugin_textdomain('ad-manager', false, dirname(plugin_basename(__FILE__)) .
  **/
 
 class ad_manager extends WP_Widget {
-    /**
-     * ad_manager()
-     */
-	public function __construct() {
-        add_action('widgets_init', array($this, 'widgets_init'));
-        add_filter('sem_cache_cookies', array($this, 'sem_cache_cookies'));
+	/**
+	 * Plugin instance.
+	 *
+	 * @see get_instance()
+	 * @type object
+	 */
+	protected static $instance = NULL;
 
-        if ( !is_admin() ) {
-        	add_action('wp_print_scripts', array($this, 'scripts'));
-        } else {
-        	add_action('admin_print_styles-widgets.php', array($this, 'admin_styles'));
-        }
+	/**
+	 * URL to this plugin's directory.
+	 *
+	 * @type string
+	 */
+	public $plugin_url = '';
+
+	/**
+	 * Path to this plugin's directory.
+	 *
+	 * @type string
+	 */
+	public $plugin_path = '';
+
+	/**
+	 * Access this plugin’s working instance
+	 *
+	 * @wp-hook plugins_loaded
+	 * @return  object of this class
+	 */
+	public static function get_instance()
+	{
+		NULL === self::$instance and self::$instance = new self;
+
+		return self::$instance;
+	}
+
+
+	/**
+	 * Loads translation file.
+	 *
+	 * Accessible to other classes to load different language files (admin and
+	 * front-end for example).
+	 *
+	 * @wp-hook init
+	 * @param   string $domain
+	 * @return  void
+	 */
+	public function load_language( $domain )
+	{
+		load_plugin_textdomain(
+			$domain,
+			FALSE,
+			$this->plugin_path . 'lang'
+		);
+	}
+
+	/**
+	 * Constructor.
+	 *
+	 *
+	 */
+
+	public function __construct() {
+
+		$this->plugin_url    = plugins_url( '/', __FILE__ );
+		$this->plugin_path   = plugin_dir_path( __FILE__ );
+		$this->load_language( 'ad-manager' );
+
+		add_action( 'plugins_loaded', array ( $this, 'init' ) );
 
         $widget_ops = array(
       			'classname' => 'ad_unit',
@@ -51,9 +105,40 @@ class ad_manager extends WP_Widget {
       			'width' => 430,
       			);
 
-        $this->init();
         $this->WP_Widget('ad_unit', __('Ad Widget', 'ad-manager'), $widget_ops, $control_ops);
     } # ad_manager
+
+
+	/**
+	 * init()
+	 *
+	 * @return void
+	 **/
+
+	function init() {
+		if ( get_option('widget_ad_unit') === false ) {
+			foreach ( array(
+				'ad_manager' => 'upgrade',
+				) as $ops => $method ) {
+				if ( get_option($ops) !== false ) {
+					$this->alt_option_name = $ops;
+					add_filter('option_' . $ops, array(get_class($this), $method));
+					break;
+				}
+			}
+		}
+
+		// more stuff: register actions and filters
+		add_action('widgets_init', array($this, 'widgets_init'));
+		add_filter('sem_cache_cookies', array($this, 'sem_cache_cookies'));
+
+		if ( !is_admin() ) {
+			add_action('wp_enqueue_scripts', array($this, 'scripts'));
+		} else {
+			add_action('admin_print_styles-widgets.php', array($this, 'admin_styles'));
+		}
+
+	} # init()
 
 
     /**
@@ -92,28 +177,7 @@ if ( !document.cookie.match(/$check_cookie/) ) {
 EOS;
 		}
 	} # scripts()
-	
-	
-	/**
-	 * init()
-	 *
-	 * @return void
-	 **/
 
-	function init() {
-		if ( get_option('widget_ad_unit') === false ) {
-			foreach ( array(
-				'ad_manager' => 'upgrade',
-				) as $ops => $method ) {
-				if ( get_option($ops) !== false ) {
-					$this->alt_option_name = $ops;
-					add_filter('option_' . $ops, array(get_class($this), $method));
-					break;
-				}
-			}
-		}
-	} # init()
-	
 	
 	/**
 	 * widgets_init()
@@ -586,4 +650,4 @@ EOS;
 	} # sem_cache_cookies()
 } # ad_manager
 
-$ad_manager = new ad_manager();
+$ad_manager = ad_manager::get_instance();
