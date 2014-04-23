@@ -112,6 +112,10 @@ The [Semiologic forum](http://forum.semiologic.com) is the best place to report 
 
 == Change Log ==
 
+= 2.4.1 =
+
+- Fix localization
+
 = 2.4 =
 
 - Code refactoring
