@@ -1,100 +1,110 @@
-# Ad Manager pot file.
-# Copyright (C) 2009 Mesoconcepts <http://www.mesoconcepts.com>
+# Copyright (C) 2014 Ad Manager
 # This file is distributed under the same license as the Ad Manager package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
-#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: 2.1.1\n"
-"Report-Msgid-Bugs-To: https://tickets.semiologic.com\n"
-"POT-Creation-Date: 2009-12-12 19:27+0100\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Project-Id-Version: Ad Manager 2.4\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/support/plugin/ad-manager\n"
+"POT-Creation-Date: 2014-04-22 23:57:58+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2014-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=CHARSET\n"
-"Content-Transfer-Encoding: 8bit\n"
 
+#. #-#-#-#-#  ad-manager.pot (Ad Manager 2.4)  #-#-#-#-#
+#. Plugin Name of the plugin/theme
 #: ad-manager-info.php:2
 msgid "Ad Manager"
 msgstr ""
 
+#. #-#-#-#-#  ad-manager.pot (Ad Manager 2.4)  #-#-#-#-#
+#. Description of the plugin/theme
 #: ad-manager-info.php:3
 msgid ""
 "A widget-based ad unit manager. Combine with Inline Widgets and Google "
 "Analytics to get the most of it."
 msgstr ""
 
-#: ad-manager.php:112
+#: ad-manager.php:102
 msgid "An ad unit. Combine with Inline Widgets for use in posts."
 msgstr ""
 
-#: ad-manager.php:119
+#: ad-manager.php:108
 msgid "Ad Widget"
 msgstr ""
 
-#: ad-manager.php:295
-#, php-format
+#: ad-manager.php:369
 msgid "Please publish to see this Ad Unit: %s"
 msgstr ""
 
-#: ad-manager.php:303
-#, php-format
+#: ad-manager.php:377
 msgid "Ad Unit: %s"
 msgstr ""
 
-#: ad-manager.php:378
+#: ad-manager.php:452
 msgid "Title (never displayed to visitors)"
 msgstr ""
 
-#: ad-manager.php:397
+#: ad-manager.php:471
 msgid "Ad Unit Context"
 msgstr ""
 
-#: ad-manager.php:400
+#: ad-manager.php:474
 msgid "Display this ad unit only when the following conditions are met:"
 msgstr ""
 
-#: ad-manager.php:412
+#: ad-manager.php:486
 msgid "The visitor comes from a search engine"
 msgstr ""
 
-#: ad-manager.php:425
+#: ad-manager.php:499
 msgid "The post (not page) is more that 2 weeks old"
 msgstr ""
 
-#: ad-manager.php:438
+#: ad-manager.php:512
 msgid ""
 "The visitor is not a regular reader (three visits in the past two weeks)"
 msgstr ""
 
-#: ad-manager.php:452
+#: ad-manager.php:526
 msgid ""
 "The following php condition (<a href=\"http://codex.wordpress.org/"
 "Conditional_Tags\" target=\"_blank\">WordPress conditional tags</a>) is met:"
 msgstr ""
 
-#: ad-manager.php:468
+#: ad-manager.php:542
 msgid "Ad Unit Style"
 msgstr ""
 
-#: ad-manager.php:476
+#: ad-manager.php:550
 msgid "Occupy the full available width"
 msgstr ""
 
-#: ad-manager.php:484
+#: ad-manager.php:558
 msgid "Float this ad unit to the left"
 msgstr ""
 
-#: ad-manager.php:492
+#: ad-manager.php:566
 msgid "Float this ad unit to the right"
 msgstr ""
 
-#: ad-manager.php:532
+#: ad-manager.php:606
 msgid "Ad Unit"
 msgstr ""
 
-#: ad-manager.php:533
+#: ad-manager.php:607
 msgid "Enter your ad unit code here"
+msgstr ""
+
+#. Plugin URI of the plugin/theme
+msgid "http://www.semiologic.com/software/ad-manager/"
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "Denis de Bernardy & Mike Koepke"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "http://www.getsemiologic.com"
 msgstr ""
