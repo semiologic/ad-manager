@@ -1,11 +1,11 @@
 <?php
 /*
 Plugin Name: Ad Manager
-Plugin URI: http://www.semiologic.com/software/ad-manager/
-Description: A widget-based ad unit manager. Combine with Inline Widgets and Google Analytics to get the most of it.
-Version: 2.5
+Plugin URI: https://www.semiologic.com/software/ad-manager/
+Description: A widget-based advertisement unit manager. Combine with Inline Widgets and Google Analytics to get the most of it.
+Version: 2.6
 Author: Denis de Bernardy & Mike Koepke
-Author URI: http://www.getsemiologic.com
+Author URI: https://www.semiologic.com
 Text Domain: ad-manager
 Domain Path: /lang
 License: Dual licensed under the MIT and GPLv2 licenses
@@ -105,7 +105,7 @@ class ad_manager extends WP_Widget {
       			'width' => 430,
       			);
 
-        $this->WP_Widget('ad_unit', __('Ad Widget', 'ad-manager'), $widget_ops, $control_ops);
+		parent::__construct('ad_unit', __('Ad Widget', 'ad-manager'), $widget_ops, $control_ops);
     } # ad_manager
 
 

@@ -1,9 +1,9 @@
 === Ad Manager ===
 Contributors: Denis-de-Bernardy, Mike_Koepke
-Donate link: http://www.semiologic.com/partners/
+Donate link: https://www.semiologic.com
 Tags: semiologic, ads, adsense
 Requires at least: 2.8
-Tested up to: 4.0
+Tested up to: 4.3
 Stable tag: trunk
 
 A widget-driven ad manager, suitable for AdSense, YPN, and many more.
@@ -101,7 +101,7 @@ By the way, by meaningful sample, I'm not meaning 1,000 visitors or 100 clicks. 
 
 = Help Me! =
 
-The [Semiologic forum](http://forum.semiologic.com) is the best place to report issues.
+The [Semiologic Support Page](https://www.semiologic.com/support/) is the best place to report issues.
 
 
 == Installation ==
@@ -111,6 +111,12 @@ The [Semiologic forum](http://forum.semiologic.com) is the best place to report 
 
 
 == Change Log ==
+
+= 2.6 =
+
+- Updated to use PHP5 constructors as WP deprecated PHP4 constructor type in 4.3.
+- WP 4.3 compat
+- Tested against PHP 5.6
 
 = 2.5 =
 
