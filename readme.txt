@@ -1,6 +1,6 @@
 === Ad Manager ===
 Contributors: Denis-de-Bernardy, Mike_Koepke
-Donate link: https://www.semiologic.com
+Donate link: https://www.semiologic.com/donate/
 Tags: semiologic, ads, adsense
 Requires at least: 2.8
 Tested up to: 4.3
@@ -111,12 +111,6 @@ The [Semiologic Support Page](https://www.semiologic.com/support/) is the best p
 
 
 == Change Log ==
-
-= 2.6 =
-
-- Updated to use PHP5 constructors as WP deprecated PHP4 constructor type in 4.3.
-- WP 4.3 compat
-- Tested against PHP 5.6
 
 = 2.5 =
 
